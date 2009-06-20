@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     04/06/2009 20:16:07                                                        
+
+     jIndustry Project    
+     jIndustry is a software architecture for SCADA softwares.
+                   
+     pldm                                                                
+     ====================================================================== -->
+<project name="jIndustry Project" default="build">
+    <description>
+            jIndustry is a software architecture for SCADA softwares.
+    </description>
+	
+	<property name="build.dir" value="build"/>
+	<property name="classes.build.dir" value="${build.dir}/classes"/>
+	<property name="classes.src.dir" value="src"/>
+	<property name="test.build.dir" value="${build.dir}/test"/>
+	<property name="test.src.dir" value="test"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="testng.jar" value="${lib.dir}/testng-5.9-jdk15.jar"/>
+	<property name="db4o.jar" value="${lib.dir}/db4o-7.4.88.12908-java5.jar"/>
+
+	<path id="project.build.path">
+		<pathelement path="${testng.jar}"/>
+		<pathelement path="${db4o.jar}"/>
+		<pathelement location="${classes.build.dir}"/>
+		<pathelement location="${test.build.dir}"/>
+	</path>
+	
+	<target name="init">
+		<mkdir dir="build/classes"/>
+		<mkdir dir="build/test"/>
+		<mkdir dir="dist"/>
+	</target>
+	
+    <target name="build" depends="depends" description="jIndustry is a software architecture for SCADA softwares.">
+    	<javac srcdir="${classes.src.dir}" destdir="${classes.build.dir}" includes="**/*.java">
+    		<classpath refid="project.build.path"/>
+    	</javac>
+    </target>
+  
+    <target name="depends" depends="init">
+    </target>
+	
+	<target name="build-test">
+		<javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includes="**/*.java">
+			<classpath refid="project.build.path"/>
+		</javac>
+		<copy file="${test.src.dir}/testng.xml" todir="${test.build.dir}"/>
+	</target>
+	
+	<target name="test" depends="build,build-test,test-core"></target>
+	
+	<target name="test-core">
+		<java classname="org.testng.TestNG" >
+			<classpath refid="project.build.path"></classpath>
+			<arg value="${test.build.dir}/testng.xml"/>
+		</java>
+	</target>
+	
+    <target name="clean" description="description">
+        <delete includeEmptyDirs="true">
+        	<filename name="jindustry.db4o"/>
+        	<fileset dir="build"></fileset>
+        	<fileset dir="test-output"></fileset>
+        </delete>
+    </target>
+
+</project>

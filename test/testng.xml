@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="jIndustry Test Suite" verbose="1">
+	<test name="core_package_test" verbose="2">
+		<classes>
+			<class name="br.jindustry.core.test.DataTest"></class>
+			<class name="br.jindustry.core.persistence.test.Db4oPersistenceManagerTest"></class>
+		</classes>
+	</test>
+	
+	<test name="data_acquisition_package_test" verbose="2">
+		<classes>
+			<class name="br.jindustry.dataaquisition.tcpip.test.TcpIpIODriverConfigurationTest"></class>
+			<class name="br.jindustry.dataaquisition.tcpip.test.TcpIpIODriverTest"></class>
+		</classes>
+	</test>
+	
+	<test name="tcp_ip_server_test" verbose="2">
+		<classes>
+			<class name="br.jindustry.server.test.TcpIpServerTest"></class>
+		</classes>
+	</test>
+	-->
+</suite>

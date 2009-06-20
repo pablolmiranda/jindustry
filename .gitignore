@@ -1,0 +1,10 @@
+*.db4o
+lib/*
+test-output/*
+build/*
+bin/*
+dist/*
+.classpath
+.project
+.settings/*
+.gitignore~
